@@ -223,7 +223,7 @@ class FlutterInappPurchase {
   /// Identical to [requestSubscription] on `iOS`.
   Future requestPurchase(String sku, {
     String developerIdAndroid,
-    String accountIdAndroid,
+    String accountId,
   }) async {
     if (_platform.isAndroid) {
       return await _channel.invokeMethod('buyItemByType', <String, dynamic>{
@@ -232,12 +232,13 @@ class FlutterInappPurchase {
         'oldSku': null,
         'prorationMode': -1,
         'developerId': developerIdAndroid,
-        'accountId': accountIdAndroid,
+        'accountId': accountId,
       });
     } else if (_platform.isIOS) {
       return await _channel.invokeMethod(
         'buyProduct', <String, dynamic>{
         'sku': sku,
+        'accountId': accountId,
       });
     }
     throw PlatformException(
@@ -255,7 +256,7 @@ class FlutterInappPurchase {
         String oldSkuAndroid,
         int prorationModeAndroid,
         String developerIdAndroid,
-        String accountIdAndroid,
+        String accountId,
       }) async {
     if (_platform.isAndroid) {
       return await _channel
@@ -265,12 +266,13 @@ class FlutterInappPurchase {
         'oldSku': oldSkuAndroid,
         'prorationMode': prorationModeAndroid ?? -1,
         'developerId': developerIdAndroid,
-        'accountId': accountIdAndroid,
+        'accountId': accountId,
       });
     } else if (_platform.isIOS) {
       return await _channel.invokeMethod(
         'buyProduct', <String, dynamic>{
         'sku': sku,
+        'accountId': accountId,
       });
     }
     throw PlatformException(
@@ -306,10 +308,12 @@ class FlutterInappPurchase {
   /// @returns {Future} will receive result from `purchaseUpdated` listener.
   Future requestProductWithOfferIOS(
     String sku, String forUser, String withOffer,
+    { String accountId }
   ) async {
     if (_platform.isIOS) {
       return await _channel.invokeMethod('requestProductWithOfferIOS', <String, dynamic>{
         'sku': sku,
+        'accountId': accountId,
         'forUser': forUser,
         'withOffer': withOffer,
       });
@@ -322,10 +326,12 @@ class FlutterInappPurchase {
   /// @returns {Future} will receive result from `purchaseUpdated` listener.
   Future requestPurchaseWithQuantityIOS(
     String sku, int quantity,
+    { String accountId }
   ) async {
     if (_platform.isIOS) {
       return await _channel.invokeMethod('requestPurchaseWithQuantity', <String, dynamic>{
         'sku': sku,
+        'accountId': accountId,
         'quantity': quantity,
       });
     }

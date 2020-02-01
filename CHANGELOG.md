@@ -1,3 +1,6 @@
+## 2.1.2
++ Pass `accountId` to `SKPayment` to support `ios` [#154](https://github.com/dooboolab/flutter_inapp_purchase/issues/154).
+
 ## 2.1.1
 + Renamed `finishTransactionIOS` argument `purchaseToken` to `transactionId`.
 
